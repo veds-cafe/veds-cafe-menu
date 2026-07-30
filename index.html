@@ -448,7 +448,6 @@
         <div class="lang-select-container">
             <button class="lang-btn active" onclick="selectLanguage('tr', this)">🇹🇷 Türkçe</button>
             <button class="lang-btn" onclick="selectLanguage('en', this)">🇬🇧 English</button>
-            <button class="lang-btn" onclick="selectLanguage('az', this)">🇦🇿 Azərbaycanca</button>
             <button class="lang-btn" onclick="selectLanguage('ru', this)">🇷🇺 Русский</button>
         </div>
         
@@ -476,7 +475,7 @@
                 <polygon points="20,20 50,50 50,37" fill="#d4a373"/>
                 <polygon points="20,20 50,50 37,50" fill="#aa7c52"/>
             </svg>
-            <div class="brand-name">Aykhan</div>
+            <div class="brand-name">Ayhan Mahmudov</div>
         </div>
     </div>
 </div>
@@ -501,10 +500,10 @@
 
 <script>
 const translations = {
-    welcome: { tr: "Hoş Geldiniz", en: "Welcome", az: "Xoş Gəlmisiniz", ru: "Добро пожаловать" },
-    button: { tr: "Menüye Gidin", en: "Go to Menu", az: "Menyuya Keçid", ru: "Перейти к меню" },
-    heroTitle: { tr: "Yeni Ürünlerimiz", en: "Our New Products", az: "Yeni Məhsullarımız", ru: "Наши Новинки" },
-    heroSubtitle: { tr: "Keşfetmeye Başlayın", en: "Start Exploring", az: "Kəşf Etməyə Başlayın", ru: "Начните исследовать" }
+    welcome: { tr: "Hoş Geldiniz", en: "Welcome", ru: "Добро пожаловать" },
+    button: { tr: "Menüye Gidin", en: "Go to Menu",ru: "Перейти к меню" },
+    heroTitle: { tr: "Yeni Ürünlerimiz", en: "Our New Products", ru: "Наши Новинки" },
+    heroSubtitle: { tr: "Keşfetmeye Başlayın", en: "Start Exploring", ru: "Начните исследовать" }
 };
 
 let currentLang = 'tr';
@@ -536,17 +535,10 @@ const vedMenu = {
     " Günün Menüsü (Ekonomi Paketler)": [
         { name: "Kurabiye", price: "150 ₺", image: "images/kurabiye.jpg" },
         { name: "Affogato", price: "150 ₺", image: "images/affogato.jpg" },
-        { name: "Waffle + Çay", price: "300 ₺", image: "images/wafflecay.jpg" },
         { name: "Tavuklu Mantarlı Makarna + Coca Cola", price: "300 ₺", image: "images/makarnacola.jpg" },
-        { name: "Waffle + Türk Kahvesi", price: "350 ₺", image: "images/waffleturkkahvesi.jpg" },
-        { name: "Waffle + Filtre Kahve", price: "350 ₺", image: "images/wafflefiltre.jpg" },
-        { name: "Waffle + Limonata", price: "350 ₺", image: "images/waffle-limonata.jpg" },
-        { name: "Dondurmalı Waffle", price: "375 ₺", image: "images/dondurmaliwaffle.jpg" },
-        { name: "Waffle + Latte", price: "390 ₺", image: "images/wafflelatte.jpg" },
     ],
     "✨ Ved's Özel Menü & Specials": [
         { name: "Ved's Limonata", price: "175 ₺", image: "images/vedslimonata.jpg", isSpecial: true },
-        { name: "Arkadaş Menü (Waffle + 2 Çay)", price: "350 ₺", image: "images/arkadas-menu.jpg", isSpecial: true },
         { name: "MAKARNA + PATATES KIZARTMASI + COLA", price: "450 ₺", image: "images/makarnapatatescola.jpg", isSpecial: true }
     ],
     " Tostlar": [
