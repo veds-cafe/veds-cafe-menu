@@ -832,16 +832,25 @@ function renderAccordionMenu() {
                         }
                     });
                     
-                    if (isExpanded) {
-                        wrapperDiv.classList.remove('expanded');
-                        imgPanel.style.maxHeight = null;
-                    } else {
-                        wrapperDiv.classList.add('expanded');
-                        imgPanel.style.maxHeight = (panel.scrollHeight + imgPanel.scrollHeight + 100) + "px";
-                        
-                        // Kateqoriya panelinin öz hündürlüyünü də avtomatik genişləndirir
-                        setTimeout(() => {
-                            panel.style.maxHeight = panel.scrollHeight + 500 + "px";
+                   if (isExpanded) {
+    wrapperDiv.classList.remove('expanded');
+    imgPanel.style.maxHeight = null;
+} else {
+    wrapperDiv.classList.add('expanded');
+
+    const img = imgPanel.querySelector("img");
+
+    if (img.complete) {
+        imgPanel.style.maxHeight = img.naturalHeight + "px";
+    } else {
+        img.onload = () => {
+            imgPanel.style.maxHeight = img.naturalHeight + "px";
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        };
+    }
+
+    requestAnimationFrame(() => {
+        panel.style.maxHeight = panel.scrollHeight + "px";
                         }, 50);
                     }
                 });
