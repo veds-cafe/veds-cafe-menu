@@ -827,7 +827,7 @@ function renderAccordionMenu() {
                         imgPanel.style.maxHeight = null;
                     } else {
                         wrapperDiv.classList.add('expanded');
-                        imgPanel.style.maxHeight = "500px"; // Şəkil panelini tam açır
+                        imgPanel.style.maxHeight = (panel.scrollHeight + imgPanel.scrollHeight + 100) + "px";
                         
                         // Kateqoriya panelinin öz hündürlüyünü də avtomatik genişləndirir
                         setTimeout(() => {
