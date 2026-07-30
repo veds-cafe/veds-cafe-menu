@@ -414,13 +414,23 @@
 
         /* Böyük Şəkil Paneli */
         .large-image-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out;
-            display: flex;
-            justify-content: center;
-            background-color: rgba(20, 11, 7, 0.5);
-        }
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    -webkit-transition: max-height 0.4s ease-in-out; /* iOS Safari animasiya dəstəyi */
+    display: flex;
+    justify-content: center;
+    background-color: rgba(20, 11, 7, 0.5);
+    will-change: max-height; /* iOS GPU acceleration */
+}
+
+.large-product-img {
+    width: 100%;
+    height: auto; /* iOS-da şəkil sıxılmasın deyə */
+    max-height: 450px;
+    object-fit: cover;
+    border-top: 1px solid rgba(212, 163, 115, 0.1);
+}
 
         .large-product-img {
             width: 100%;
