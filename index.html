@@ -2,12 +2,17 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ved's Cafe - Menyu</title>
     <style>
         /* ==================== ÜMUMİ VƏ ARXA FON AYARLARI ==================== */
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             color: #f5ebe6;
             margin: 0;
             padding: 0;
@@ -46,8 +51,8 @@
                         url('fon.jpeg') no-repeat center center;
             background-size: cover;
             transition: opacity 0.8s ease, visibility 0.8s ease;
+            -webkit-transition: opacity 0.8s ease, visibility 0.8s ease;
             padding: 40px 20px 20px 20px;
-            box-sizing: border-box;
         }
 
         .loaded #intro-overlay {
@@ -83,6 +88,7 @@
             stroke-dasharray: 300;
             stroke-dashoffset: 300;
             animation: drawLetter 1.2s forwards ease-in-out;
+            -webkit-animation: drawLetter 1.2s forwards ease-in-out;
         }
 
         .letter-v { animation-delay: 0.1s; }
@@ -101,10 +107,10 @@
             margin-top: 15px;
             margin-bottom: 35px;
             text-transform: uppercase;
-            font-family: 'Segoe UI', sans-serif;
             text-shadow: 0 3px 6px rgba(0,0,0,0.8);
             opacity: 0;
             animation: fadeInText 1s forwards ease-in-out 1.2s;
+            -webkit-animation: fadeInText 1s forwards ease-in-out 1.2s;
         }
 
         @keyframes fadeInText {
@@ -119,6 +125,7 @@
             margin-bottom: 25px;
             opacity: 0;
             animation: fadeInText 1s forwards ease-in-out 1.5s;
+            -webkit-animation: fadeInText 1s forwards ease-in-out 1.5s;
         }
 
         .lang-btn {
@@ -130,6 +137,7 @@
             font-size: 0.95rem;
             cursor: pointer;
             backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -158,6 +166,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             opacity: 0;
             animation: fadeInText 1s forwards ease-in-out 1.7s;
+            -webkit-animation: fadeInText 1s forwards ease-in-out 1.7s;
         }
 
         .go-menu-btn:hover {
@@ -174,6 +183,7 @@
             padding-bottom: 10px;
             opacity: 0;
             animation: fadeInText 1s forwards ease-in-out 1.9s;
+            -webkit-animation: fadeInText 1s forwards ease-in-out 1.9s;
         }
 
         .credits-text {
@@ -196,7 +206,6 @@
         }
 
         .brand-name {
-            font-family: 'Segoe UI', sans-serif;
             font-size: 1.15rem;
             font-weight: bold;
             color: #f5ebe6;
@@ -224,6 +233,7 @@
             width: auto;
             height: auto;
             transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
             object-fit: cover;
             z-index: 1;
         }
@@ -272,6 +282,7 @@
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 0.8s ease, transform 0.8s ease;
+            -webkit-transition: opacity 0.8s ease, -webkit-transform 0.8s ease;
         }
         .loaded .menu-container {
             opacity: 1;
@@ -296,11 +307,8 @@
             justify-content: space-between;
             align-items: center;
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
             transition: all 0.3s ease;
-        }
-        .category-accordion:hover {
-            background-color: rgba(56, 33, 21, 0.95);
-            border-color: #d4a373;
         }
 
         .special-accordion {
@@ -309,27 +317,38 @@
             background-color: rgba(56, 33, 21, 0.85);
             box-shadow: 0 0 10px rgba(212,163,115,0.1);
         }
-        .special-accordion:hover {
-            background-color: rgba(71, 43, 27, 0.95);
-        }
 
         .accordion-arrow {
             font-size: 0.9rem;
             transition: transform 0.3s ease;
+            -webkit-transition: -webkit-transform 0.3s ease;
             color: rgba(245, 235, 230, 0.6);
         }
-        .active .accordion-arrow {
-            transform: rotate(180deg);
-            color: #d4a373;
-        }
-
+        
+        /* Kateqoriya Paneli (iOS Safari uyğun təmiz CSS) */
         .accordion-panel {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.5s ease-in-out;
+            -webkit-transition: max-height 0.5s ease-in-out;
             background-color: rgba(26, 15, 10, 0.65);
             border-radius: 0 0 8px 8px;
             backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+            will-change: max-height;
+        }
+
+        /* Kateqoriya aktiv olduqda */
+        .category-accordion.active {
+            border-radius: 8px 8px 0 0;
+        }
+        .category-accordion.active .accordion-arrow {
+            transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
+            color: #d4a373;
+        }
+        .category-accordion.active + .accordion-panel {
+            max-height: 8000px; /* iOS-da daxili şəkillər kəsilməsin deyə tam geniş limit */
         }
 
         .menu-grid {
@@ -363,6 +382,7 @@
             justify-content: space-between;
             cursor: pointer;
             user-select: none;
+            -webkit-user-select: none;
         }
 
         .item-details {
@@ -406,37 +426,37 @@
             font-size: 0.75rem;
             color: #d4a373;
             transition: transform 0.3s ease;
+            -webkit-transition: -webkit-transform 0.3s ease;
         }
         
         .menu-item-wrapper.expanded .item-dropdown-icon {
             transform: rotate(180deg);
+            -webkit-transform: rotate(180deg);
         }
 
-        /* Böyük Şəkil Paneli */
+        /* Böyük Şəkil Paneli (Safari GPU Təcilli) */
         .large-image-panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out;
-    -webkit-transition: max-height 0.4s ease-in-out; /* iOS Safari animasiya dəstəyi */
-    display: flex;
-    justify-content: center;
-    background-color: rgba(20, 11, 7, 0.5);
-    will-change: max-height; /* iOS GPU acceleration */
-}
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+            -webkit-transition: max-height 0.4s ease-in-out;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(20, 11, 7, 0.5);
+            will-change: max-height;
+        }
 
-.large-product-img {
-    width: 100%;
-    height: auto; /* iOS-da şəkil sıxılmasın deyə */
-    max-height: 450px;
-    object-fit: cover;
-    border-top: 1px solid rgba(212, 163, 115, 0.1);
-}
+        .menu-item-wrapper.expanded .large-image-panel {
+            max-height: 600px; /* JS-ə ehtiyac qalmadan iOS-da zəmanətli açılır */
+        }
 
         .large-product-img {
             width: 100%;
+            height: auto;
             max-height: 450px;
             object-fit: cover;
             border-top: 1px solid rgba(212, 163, 115, 0.1);
+            display: block;
         }
     </style>
 </head>
@@ -511,7 +531,7 @@
 <script>
 const translations = {
     welcome: { tr: "Hoş Geldiniz", en: "Welcome", ru: "Добро пожаловать" },
-    button: { tr: "Menüye Gidin", en: "Go to Menu",ru: "Перейти к меню" },
+    button: { tr: "Menüye Gidin", en: "Go to Menu", ru: "Перейти к меню" },
     heroTitle: { tr: "Yeni Ürünlerimiz", en: "Our New Products", ru: "Наши Новинки" },
     heroSubtitle: { tr: "Keşfetmeye Başlayın", en: "Start Exploring", ru: "Начните исследовать" }
 };
@@ -553,29 +573,13 @@ const vedMenu = {
         { name: "Ved's Limonata", price: "175 ₺", image: "images/vedslimonata.jpg", isSpecial: true },
         { name: "MAKARNA + PATATES KIZARTMASI + COLA", price: "450 ₺", image: "images/makarnapatatescola.jpg", isSpecial: true }
     ],
-    " Tostlar": [
-        { name: "ATOM", price: "250 ₺", image: "images/atom.jpg" },
-        { name: "YUMURTA KAŞAR", price: "200 ₺", image: "images/yumurtakasar.jpg" },
-        { name: "SUCUKLU TOST", price: "150 ₺", image: "images/sucuklutost.jpg" },
-        { name: "KAŞARLI TOST", price: "175 ₺", image: "images/kasarlitost.jpg" },
-        { name: "KARIŞIK TOST", price: "200 ₺", image: "images/karisiktost.jpg" },
-        { name: "DUBLE TOST", price: "225 ₺", image: "images/doubletost.jpg" }
-    ],
-    " Makarnalar": [
-        { name: "KREMALI TAVUKLU MANTARLI MAKARNA", price: "250 ₺", image: "images/kremalimantarlitavuklumakarna.jpg" },
-        { name: "MANTARLI KREMALI MAKARNA", price: "225 ₺", image: "images/tavuklumakarna.jpeg" },
-        { name: "TAVUKLU KREMALI MAKARNA", price: "225 ₺", image: "images/kremalitavuklumakarna.jpeg" },
-        { name: "KÖRİLİ TAVUKLU MANTARLI MAKARNA", price: "275 ₺", image: "images/korilitavuklumantarlimakarna.jpg" },
-        { name: "KÖRİLİ TAVUKLU MAKARNA", price: "250 ₺", image: "images/korilitavuklumakarna.jpg" },
-        { name: "KREMALI MAKARNA", price: "200 ₺", image: "images/kremalimakarna.jpg" },
-        { name: "SADE MAKARNA", price: "175 ₺", image: "images/sademakarna.png" }
-    ],
-    " Wrapler": [
-        { name: "TAVUKLU WRAP", price: "300 ₺", image: "images/tavukluwrap.jpg" }
-    ],
-    " Atıştırmalıklar": [
-        { name: "Patates Kızartması", price: "150 ₺", image: "images/patateskizartmasi.jpg" },
-        { name: "Ved's Full Karışık Sepet", price: "225 ₺", image: "images/karisiksepet.jpg" }
+    " Nargile": [
+        { name: "MANTERRA DARK TÜTÜN", price: "550 ₺", image: "images/manterradarktutun.jpg" },
+        { name: "KÖZ DEĞİŞİMİ", price: "100 ₺", image: "images/koz-degisimi.jpg" },
+        { name: "NARGİLE", price: "400 ₺", image: "images/nargile.jpg" },
+        { name: "ANASON/CAPİCİNO/ÜZÜM", price: "450 ₺", image: "images/nargile.jpg" },
+        { name: "LÜLE DEĞİŞİM", price: "200 ₺", image: "images/lule-degisim.jpg" },
+        { name: "MİX NARGİLE", price: "450 ₺", image: "images/nargile.jpg" }
     ],
     " Dünya Kahveleri (Sıcak)": [
         { name: "RASBERRY WHİTE MOCHA", price: "155 ₺", image: "images/raspberry-white-mocha.jpg" },
@@ -613,11 +617,11 @@ const vedMenu = {
         { name: "ICE BLUE CHOCOLATE MOCHA", price: "170 ₺", image: "images/ice-blue-mocha.jpg" }
     ],
     "Matcha": [
-    { name: "ICE MANGO MATCHA", price: "180 ₺", image: "images/ice-mango-matcha.jpg" },
-    { name: "ICE STRAWBERRY MATCHA", price: "180 ₺", image: "images/ice-strawberry-matcha.jpg" },
-    { name: "MANGO MATCHA", price: "160 ₺", image: "images/mango-matcha.jpg" },
-    { name: "STRAWBERRY MATCHA", price: "160 ₺", image: "images/strawberry-matcha.jpg" }
-],
+        { name: "ICE MANGO MATCHA", price: "180 ₺", image: "images/ice-mango-matcha.jpg" },
+        { name: "ICE STRAWBERRY MATCHA", price: "180 ₺", image: "images/ice-strawberry-matcha.jpg" },
+        { name: "MANGO MATCHA", price: "160 ₺", image: "images/mango-matcha.jpg" },
+        { name: "STRAWBERRY MATCHA", price: "160 ₺", image: "images/strawberry-matcha.jpg" }
+    ],
     " Kahve Çeşitleri (Türk Kahvesi)": [
         { name: "TÜRK KAHVESİ", price: "100 ₺", image: "images/turk-kahvesi.jpg" },
         { name: "MENENGİÇ KAHVESİ", price: "100 ₺", image: "images/menengic.jpg" },
@@ -643,15 +647,7 @@ const vedMenu = {
         { name: "NANE LİMON ORALET", price: "60 ₺", image: "images/nane-limon-oralet.jpg" },
         { name: "KAKAO ORALET", price: "60 ₺", image: "images/kakao-oralet.jpg" }
     ],
-    " Nargile": [
-        { name: "MANTERRA DARK TÜTÜN", price: "550 ₺", image: "images/manterradarktutun.jpg" },
-        { name: "KÖZ DEĞİŞİMİ", price: "100 ₺", image: "images/koz-degisimi.jpg" },
-        { name: "NARGİLE", price: "400 ₺", image: "images/nargile.jpg" },
-        { name: "ANASON/CAPİCİNO/ÜZÜM", price: "450 ₺", image: "images/nargile.jpg" },
-        { name: "LÜLE DEĞİŞİM", price: "200 ₺", image: "images/lule-degisim.jpg" },
-        { name: "MİX NARGİLE", price: "450 ₺", image: "images/nargile.jpg" }
-    ],
-     " Meşrubatlar": [
+    " Meşrubatlar": [
         { name: "FUSE TEA KARPUZ", price: "100 ₺", image: "images/fuse-tea-karpuz.jpg" },
         { name: "FUSE TEA ŞEFTALİ", price: "100 ₺", image: "images/fuse-tea-seftali.jpg" },
         { name: "FREŞA NARLI", price: "75 ₺", image: "images/fresa-narli.jpg" },
@@ -667,12 +663,6 @@ const vedMenu = {
         { name: "AYRAN", price: "100 ₺", image: "images/ayran.jpg" },
         { name: "SPRITE", price: "100 ₺", image: "images/sprite.jpg" },
         { name: "FUSE TEA MANGO", price: "100 ₺", image: "images/fuse-tea-mango.jpg" }
-    ],
-    " Okey Saat Ücreti": [
-        { name: "MASA AÇMA", price: "1 ₺", image: "images/okey.jpg" },
-        { name: "PASTA SERVİS ÜCRETI (kisi basi)", price: "50 ₺", image: "images/pasta-servis.jpg" },
-        { name: "1 SAAT", price: "150 ₺", image: "images/1saat.jpg" },
-        { name: "YARIM SAAT", price: "75 ₺", image: "images/yarimsaat.jpg" }
     ],
     " Fruit Mix & Lime Çeşitleri": [
         { name: "MANGO LİME", price: "160 ₺", image: "images/mangolime.jpg" },
@@ -716,15 +706,13 @@ const vedMenu = {
         { name: "VED'S LİMONATA", price: "175 ₺", image: "images/veds-limonata.jpg" }
     ],
     " Smoothieler": [
-
-{ name: "ORMAN MEYVELİ SMOOTHIE", price: "175 ₺", image: "images/orman-meyveli-frozen.jpg" },
+        { name: "ORMAN MEYVELİ SMOOTHIE", price: "175 ₺", image: "images/orman-meyveli-frozen.jpg" },
         { name: "ŞEFTALİLİ SMOOTHİE", price: "175 ₺", image: "images/seftali-smoothie.jpg" },
         { name: "KİVİLİ SMOOTHİE", price: "175 ₺", image: "images/kivi-smoothie.jpg" },
         { name: "ÇİLEK SMOOTHİE", price: "175 ₺", image: "images/cilek-smoothie.jpg" },
         { name: "ELMALI SMOOTHİE", price: "175 ₺", image: "images/elma-smoothie.jpg" },
         { name: "MANGO ÇARKIFELEK SMOOTHİE", price: "175 ₺", image: "images/mango-carkifelek.jpg" }
-
-],
+    ],
     " Dondurmalı Milkshake": [
         { name: "MANGO MİLKSHAKE", price: "200 ₺", image: "images/mango-milkshake.jpg" },
         { name: "KARPUZLU MİLKSHAKE", price: "200 ₺", image: "images/karpuzlu-milkshake.jpg" },
@@ -758,20 +746,44 @@ const vedMenu = {
         { name: "CHAİ TEA", price: "150 ₺", image: "images/chai-tea.jpg" }
     ],
     "Şifa ve Bitki Çayları": [
-    { name: "NANE LİMON ÇAYI", price: "120 ₺", image: "images/nane-limon-cayi.jpg" },
-    { name: "IHLAMUR ÇAYI", price: "120 ₺", image: "images/ihlamur-cayi.jpg" },
-    { name: "PAPATYA ÇAYI", price: "120 ₺", image: "images/papatya-cayi.jpg" },
-    { name: "ADA ÇAYI", price: "120 ₺", image: "images/ada-cayi.jpg" },
-    { name: "YEŞİL ÇAY", price: "120 ₺", image: "images/yesil-cay.jpg" },
-    { name: "EXTRA BAL", price: "35 ₺", image: "images/extra-bal.jpg" },
-    { name: "KEKİK ÇAYI", price: "120 ₺", image: "images/kekik-cayi.jpg" },
-    { name: "KIŞ ÇAYI", price: "120 ₺", image: "images/kis-cayi.jpg" },
-    { name: "HİBİSCUS LEMONADE TEA", price: "145 ₺", image: "images/hibiscus-lemonade-tea.jpg" },
-    { name: "BLUE FLOWER TEA", price: "145 ₺", image: "images/blue-flower-tea.jpg" },
-    { name: "RASPBERRY PUNCH TEA", price: "145 ₺", image: "images/raspberry-punch-tea.jpg" },
-    { name: "WINTER DREAM", price: "145 ₺", image: "images/winter-dream.jpg" },
-    { name: "CARNAVAL TEA", price: "145 ₺", image: "images/carnaval-tea.jpg" }
-]
+        { name: "NANE LİMON ÇAYI", price: "120 ₺", image: "images/nane-limon-cayi.jpg" },
+        { name: "IHLAMUR ÇAYI", price: "120 ₺", image: "images/ihlamur-cayi.jpg" },
+        { name: "PAPATYA ÇAYI", price: "120 ₺", image: "images/papatya-cayi.jpg" },
+        { name: "ADA ÇAYI", price: "120 ₺", image: "images/ada-cayi.jpg" },
+        { name: "YEŞİL ÇAY", price: "120 ₺", image: "images/yesil-cay.jpg" },
+        { name: "EXTRA BAL", price: "35 ₺", image: "images/extra-bal.jpg" },
+        { name: "KEKİK ÇAYI", price: "120 ₺", image: "images/kekik-cayi.jpg" },
+        { name: "KIŞ ÇAYI", price: "120 ₺", image: "images/kis-cayi.jpg" },
+        { name: "HİBİSCUS LEMONADE TEA", price: "145 ₺", image: "images/hibiscus-lemonade-tea.jpg" },
+        { name: "BLUE FLOWER TEA", price: "145 ₺", image: "images/blue-flower-tea.jpg" },
+        { name: "RASPBERRY PUNCH TEA", price: "145 ₺", image: "images/raspberry-punch-tea.jpg" },
+        { name: "WINTER DREAM", price: "145 ₺", image: "images/winter-dream.jpg" },
+        { name: "CARNAVAL TEA", price: "145 ₺", image: "images/carnaval-tea.jpg" }
+    ],
+    " Tostlar": [
+        { name: "ATOM", price: "250 ₺", image: "images/atom.jpg" },
+        { name: "YUMURTA KAŞAR", price: "200 ₺", image: "images/yumurtakasar.jpg" },
+        { name: "SUCUKLU TOST", price: "150 ₺", image: "images/sucuklutost.jpg" },
+        { name: "KAŞARLI TOST", price: "175 ₺", image: "images/kasarlitost.jpg" },
+        { name: "KARIŞIK TOST", price: "200 ₺", image: "images/karisiktost.jpg" },
+        { name: "DUBLE TOST", price: "225 ₺", image: "images/doubletost.jpg" }
+    ],
+    " Makarnalar": [
+        { name: "KREMALI TAVUKLU MANTARLI MAKARNA", price: "250 ₺", image: "images/kremalimantarlitavuklumakarna.jpg" },
+        { name: "MANTARLI KREMALI MAKARNA", price: "225 ₺", image: "images/tavuklumakarna.jpeg" },
+        { name: "TAVUKLU KREMALI MAKARNA", price: "225 ₺", image: "images/kremalitavuklumakarna.jpeg" },
+        { name: "KÖRİLİ TAVUKLU MANTARLI MAKARNA", price: "275 ₺", image: "images/korilitavuklumantarlimakarna.jpg" },
+        { name: "KÖRİLİ TAVUKLU MAKARNA", price: "250 ₺", image: "images/korilitavuklumakarna.jpg" },
+        { name: "KREMALI MAKARNA", price: "200 ₺", image: "images/kremalimakarna.jpg" },
+        { name: "SADE MAKARNA", price: "175 ₺", image: "images/sademakarna.png" }
+    ],
+    " Wrapler": [
+        { name: "TAVUKLU WRAP", price: "300 ₺", image: "images/tavukluwrap.jpg" }
+    ],
+    " Atıştırmalıklar": [
+        { name: "Patates Kızartması", price: "150 ₺", image: "images/patateskizartmasi.jpg" },
+        { name: "Ved's Full Karışık Sepet", price: "225 ₺", image: "images/karisiksepet.jpg" }
+    ]
 };
 
 const accordionOutput = document.getElementById('menu-accordion-output');
@@ -793,7 +805,7 @@ function renderAccordionMenu() {
         const gridDiv = document.createElement('div');
         gridDiv.className = 'menu-grid';
 
-        vedMenu[category].forEach((item, index) => {
+        vedMenu[category].forEach((item) => {
             const wrapperDiv = document.createElement('div');
             wrapperDiv.className = item.isSpecial ? 'menu-item-wrapper special-item' : 'menu-item-wrapper';
             
@@ -812,47 +824,26 @@ function renderAccordionMenu() {
                 </div>
                 ${item.hasLargeImage ? `
                 <div class="large-image-panel">
-                    <img src="${item.image}" alt="${item.name} Büyük" class="large-product-img">
+                    <img src="${item.image}" alt="${item.name} Büyük" class="large-product-img" loading="lazy">
                 </div>
                 ` : ''}
             `;
             
             if (item.hasLargeImage) {
                 const menuItemClickable = wrapperDiv.querySelector('.menu-item');
-                const imgPanel = wrapperDiv.querySelector('.large-image-panel');
                 
                 menuItemClickable.addEventListener('click', function(e) {
+                    e.stopPropagation();
                     const isExpanded = wrapperDiv.classList.contains('expanded');
                     
-                    // Digər açıq şəkilləri bağla
+                    // Kateqoriya daxilindəki digər şəkilləri bağla
                     gridDiv.querySelectorAll('.menu-item-wrapper.expanded').forEach(otherWrapper => {
                         if (otherWrapper !== wrapperDiv) {
                             otherWrapper.classList.remove('expanded');
-                            otherWrapper.querySelector('.large-image-panel').style.maxHeight = null;
                         }
                     });
                     
-                   if (isExpanded) {
-    wrapperDiv.classList.remove('expanded');
-    imgPanel.style.maxHeight = null;
-} else {
-    wrapperDiv.classList.add('expanded');
-
-    const img = imgPanel.querySelector("img");
-
-    if (img.complete) {
-        imgPanel.style.maxHeight = img.naturalHeight + "px";
-    } else {
-        img.onload = () => {
-            imgPanel.style.maxHeight = img.naturalHeight + "px";
-            panel.style.maxHeight = panel.scrollHeight + "px";
-        };
-    }
-
-    requestAnimationFrame(() => {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-                        }, 50);
-                    }
+                    wrapperDiv.classList.toggle('expanded', !isExpanded);
                 });
             }
 
@@ -863,21 +854,18 @@ function renderAccordionMenu() {
         accordionOutput.appendChild(btn);
         accordionOutput.appendChild(panel);
 
-        btn.addEventListener('click', function() {
-            this.classList.toggle('active');
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isActive = this.classList.contains('active');
             
+            // Digər açıq kateqoriyaları bağla
             document.querySelectorAll('.category-accordion').forEach(otherBtn => {
-                if (otherBtn !== this && otherBtn.classList.contains('active')) {
+                if (otherBtn !== this) {
                     otherBtn.classList.remove('active');
-                    otherBtn.nextElementSibling.style.maxHeight = null;
                 }
             });
 
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
+            this.classList.toggle('active', !isActive);
         });
     }
 }
