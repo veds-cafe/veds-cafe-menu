@@ -2,17 +2,12 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ved's Cafe - Menyu</title>
     <style>
         /* ==================== ÜMUMİ VƏ ARXA FON AYARLARI ==================== */
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #f5ebe6;
             margin: 0;
             padding: 0;
@@ -51,8 +46,8 @@
                         url('fon.jpeg') no-repeat center center;
             background-size: cover;
             transition: opacity 0.8s ease, visibility 0.8s ease;
-            -webkit-transition: opacity 0.8s ease, visibility 0.8s ease;
             padding: 40px 20px 20px 20px;
+            box-sizing: border-box;
         }
 
         .loaded #intro-overlay {
@@ -88,7 +83,6 @@
             stroke-dasharray: 300;
             stroke-dashoffset: 300;
             animation: drawLetter 1.2s forwards ease-in-out;
-            -webkit-animation: drawLetter 1.2s forwards ease-in-out;
         }
 
         .letter-v { animation-delay: 0.1s; }
@@ -107,10 +101,10 @@
             margin-top: 15px;
             margin-bottom: 35px;
             text-transform: uppercase;
+            font-family: 'Segoe UI', sans-serif;
             text-shadow: 0 3px 6px rgba(0,0,0,0.8);
             opacity: 0;
             animation: fadeInText 1s forwards ease-in-out 1.2s;
-            -webkit-animation: fadeInText 1s forwards ease-in-out 1.2s;
         }
 
         @keyframes fadeInText {
@@ -125,7 +119,6 @@
             margin-bottom: 25px;
             opacity: 0;
             animation: fadeInText 1s forwards ease-in-out 1.5s;
-            -webkit-animation: fadeInText 1s forwards ease-in-out 1.5s;
         }
 
         .lang-btn {
@@ -137,7 +130,6 @@
             font-size: 0.95rem;
             cursor: pointer;
             backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -166,7 +158,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             opacity: 0;
             animation: fadeInText 1s forwards ease-in-out 1.7s;
-            -webkit-animation: fadeInText 1s forwards ease-in-out 1.7s;
         }
 
         .go-menu-btn:hover {
@@ -183,7 +174,6 @@
             padding-bottom: 10px;
             opacity: 0;
             animation: fadeInText 1s forwards ease-in-out 1.9s;
-            -webkit-animation: fadeInText 1s forwards ease-in-out 1.9s;
         }
 
         .credits-text {
@@ -206,6 +196,7 @@
         }
 
         .brand-name {
+            font-family: 'Segoe UI', sans-serif;
             font-size: 1.15rem;
             font-weight: bold;
             color: #f5ebe6;
@@ -233,7 +224,6 @@
             width: auto;
             height: auto;
             transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
             object-fit: cover;
             z-index: 1;
         }
@@ -282,7 +272,6 @@
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 0.8s ease, transform 0.8s ease;
-            -webkit-transition: opacity 0.8s ease, -webkit-transform 0.8s ease;
         }
         .loaded .menu-container {
             opacity: 1;
@@ -307,8 +296,12 @@
             justify-content: space-between;
             align-items: center;
             backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .category-accordion:hover {
+            background-color: rgba(56, 33, 21, 0.95);
+            border-color: #d4a373;
         }
 
         .special-accordion {
@@ -317,38 +310,27 @@
             background-color: rgba(56, 33, 21, 0.85);
             box-shadow: 0 0 10px rgba(212,163,115,0.1);
         }
+        .special-accordion:hover {
+            background-color: rgba(71, 43, 27, 0.95);
+        }
 
         .accordion-arrow {
             font-size: 0.9rem;
             transition: transform 0.3s ease;
-            -webkit-transition: -webkit-transform 0.3s ease;
             color: rgba(245, 235, 230, 0.6);
         }
-        
-        /* Kateqoriya Paneli (iOS Safari uyğun təmiz CSS) */
+        .active .accordion-arrow {
+            transform: rotate(180deg);
+            color: #d4a373;
+        }
+
         .accordion-panel {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
-            -webkit-transition: max-height 0.5s ease-in-out;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             background-color: rgba(26, 15, 10, 0.65);
             border-radius: 0 0 8px 8px;
             backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
-            will-change: max-height;
-        }
-
-        /* Kateqoriya aktiv olduqda */
-        .category-accordion.active {
-            border-radius: 8px 8px 0 0;
-        }
-        .category-accordion.active .accordion-arrow {
-            transform: rotate(180deg);
-            -webkit-transform: rotate(180deg);
-            color: #d4a373;
-        }
-        .category-accordion.active + .accordion-panel {
-            max-height: 8000px; /* iOS-da daxili şəkillər kəsilməsin deyə tam geniş limit */
         }
 
         .menu-grid {
@@ -382,7 +364,7 @@
             justify-content: space-between;
             cursor: pointer;
             user-select: none;
-            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .item-details {
@@ -397,6 +379,8 @@
             border-radius: 6px;
             object-fit: cover;
             background-color: #3d2519;
+            cursor: pointer !important;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .item-name {
@@ -426,37 +410,72 @@
             font-size: 0.75rem;
             color: #d4a373;
             transition: transform 0.3s ease;
-            -webkit-transition: -webkit-transform 0.3s ease;
         }
         
         .menu-item-wrapper.expanded .item-dropdown-icon {
             transform: rotate(180deg);
-            -webkit-transform: rotate(180deg);
         }
 
-        /* Böyük Şəkil Paneli (Safari GPU Təcilli) */
+        /* Böyük Şəkil Paneli (Daxili) */
         .large-image-panel {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-in-out;
-            -webkit-transition: max-height 0.4s ease-in-out;
             display: flex;
             justify-content: center;
             background-color: rgba(20, 11, 7, 0.5);
-            will-change: max-height;
-        }
-
-        .menu-item-wrapper.expanded .large-image-panel {
-            max-height: 600px; /* JS-ə ehtiyac qalmadan iOS-da zəmanətli açılır */
         }
 
         .large-product-img {
             width: 100%;
-            height: auto;
             max-height: 450px;
             object-fit: cover;
             border-top: 1px solid rgba(212, 163, 115, 0.1);
-            display: block;
+            cursor: pointer !important;
+        }
+
+        /* ==================== IOS SAFARI ÜÇÜN MÜTLƏQ MODAL (FULLSCREEN ZOOM) ==================== */
+        .ios-full-modal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            height: 100dvh !important;
+            background: rgba(0, 0, 0, 0.92);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999999 !important;
+            -webkit-transform: translateZ(99999px) !important;
+            transform: translateZ(99999px) !important;
+            padding: 15px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .ios-full-modal.active {
+            display: flex !important;
+        }
+
+        .ios-full-modal img {
+            max-width: 95%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.9);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .ios-full-modal-close {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            color: #d4a373;
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
         }
     </style>
 </head>
@@ -531,7 +550,7 @@
 <script>
 const translations = {
     welcome: { tr: "Hoş Geldiniz", en: "Welcome", ru: "Добро пожаловать" },
-    button: { tr: "Menüye Gidin", en: "Go to Menu", ru: "Перейти к меню" },
+    button: { tr: "Menüye Gidin", en: "Go to Menu",ru: "Перейти к меню" },
     heroTitle: { tr: "Yeni Ürünlerimiz", en: "Our New Products", ru: "Наши Новинки" },
     heroSubtitle: { tr: "Keşfetmeye Başlayın", en: "Start Exploring", ru: "Начните исследовать" }
 };
@@ -573,7 +592,7 @@ const vedMenu = {
         { name: "Ved's Limonata", price: "175 ₺", image: "images/vedslimonata.jpg", isSpecial: true },
         { name: "MAKARNA + PATATES KIZARTMASI + COLA", price: "450 ₺", image: "images/makarnapatatescola.jpg", isSpecial: true }
     ],
-    " Nargile": [
+     " Nargile": [
         { name: "MANTERRA DARK TÜTÜN", price: "550 ₺", image: "images/manterradarktutun.jpg" },
         { name: "KÖZ DEĞİŞİMİ", price: "100 ₺", image: "images/koz-degisimi.jpg" },
         { name: "NARGİLE", price: "400 ₺", image: "images/nargile.jpg" },
@@ -647,7 +666,7 @@ const vedMenu = {
         { name: "NANE LİMON ORALET", price: "60 ₺", image: "images/nane-limon-oralet.jpg" },
         { name: "KAKAO ORALET", price: "60 ₺", image: "images/kakao-oralet.jpg" }
     ],
-    " Meşrubatlar": [
+     " Meşrubatlar": [
         { name: "FUSE TEA KARPUZ", price: "100 ₺", image: "images/fuse-tea-karpuz.jpg" },
         { name: "FUSE TEA ŞEFTALİ", price: "100 ₺", image: "images/fuse-tea-seftali.jpg" },
         { name: "FREŞA NARLI", price: "75 ₺", image: "images/fresa-narli.jpg" },
@@ -788,6 +807,30 @@ const vedMenu = {
 
 const accordionOutput = document.getElementById('menu-accordion-output');
 
+// iOS SAFARI ÜÇÜN DİNAMİK FULL-SCREEN MODAL YARATMA SYSTEMİ
+let iosModal = document.querySelector('.ios-full-modal');
+if (!iosModal) {
+    iosModal = document.createElement('div');
+    iosModal.className = 'ios-full-modal';
+    iosModal.innerHTML = '<span class="ios-full-modal-close">&times;</span><img src="" alt="Büyük Görsel">';
+    document.body.appendChild(iosModal);
+}
+
+const iosModalImg = iosModal.querySelector('img');
+
+function openFullImage(src) {
+    if(!src) return;
+    iosModalImg.src = src;
+    iosModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+iosModal.addEventListener('click', function() {
+    iosModal.classList.remove('active');
+    document.body.style.overflow = '';
+    iosModalImg.src = '';
+});
+
 function renderAccordionMenu() {
     accordionOutput.innerHTML = ""; 
 
@@ -824,26 +867,57 @@ function renderAccordionMenu() {
                 </div>
                 ${item.hasLargeImage ? `
                 <div class="large-image-panel">
-                    <img src="${item.image}" alt="${item.name} Büyük" class="large-product-img" loading="lazy">
+                    <img src="${item.image}" alt="${item.name} Büyük" class="large-product-img">
                 </div>
                 ` : ''}
             `;
             
+            // Kiçik şəkilə basanda birbaşa iOS Safari Modalında açılır
+            const smallImg = wrapperDiv.querySelector('.item-img');
+            if (smallImg) {
+                smallImg.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openFullImage(item.image);
+                });
+            }
+
+            // Akkordeon daxilində böyük şəkil olan elementlər üçün 
             if (item.hasLargeImage) {
                 const menuItemClickable = wrapperDiv.querySelector('.menu-item');
+                const imgPanel = wrapperDiv.querySelector('.large-image-panel');
+                const largeImg = wrapperDiv.querySelector('.large-product-img');
+
+                // Daxili böyük şəkilə basıldıqda tam ekran Modal açır
+                if(largeImg) {
+                    largeImg.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        openFullImage(item.image);
+                    });
+                }
                 
                 menuItemClickable.addEventListener('click', function(e) {
-                    e.stopPropagation();
+                    if (e.target.classList.contains('item-img')) return;
+
                     const isExpanded = wrapperDiv.classList.contains('expanded');
                     
-                    // Kateqoriya daxilindəki digər şəkilləri bağla
                     gridDiv.querySelectorAll('.menu-item-wrapper.expanded').forEach(otherWrapper => {
                         if (otherWrapper !== wrapperDiv) {
                             otherWrapper.classList.remove('expanded');
+                            otherWrapper.querySelector('.large-image-panel').style.maxHeight = null;
                         }
                     });
                     
-                    wrapperDiv.classList.toggle('expanded', !isExpanded);
+                    if (isExpanded) {
+                        wrapperDiv.classList.remove('expanded');
+                        imgPanel.style.maxHeight = null;
+                    } else {
+                        wrapperDiv.classList.add('expanded');
+                        imgPanel.style.maxHeight = "500px";
+                        
+                        setTimeout(() => {
+                            panel.style.maxHeight = panel.scrollHeight + 500 + "px";
+                        }, 50);
+                    }
                 });
             }
 
@@ -854,18 +928,21 @@ function renderAccordionMenu() {
         accordionOutput.appendChild(btn);
         accordionOutput.appendChild(panel);
 
-        btn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const isActive = this.classList.contains('active');
+        btn.addEventListener('click', function() {
+            this.classList.toggle('active');
             
-            // Digər açıq kateqoriyaları bağla
             document.querySelectorAll('.category-accordion').forEach(otherBtn => {
-                if (otherBtn !== this) {
+                if (otherBtn !== this && otherBtn.classList.contains('active')) {
                     otherBtn.classList.remove('active');
+                    otherBtn.nextElementSibling.style.maxHeight = null;
                 }
             });
 
-            this.classList.toggle('active', !isActive);
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
         });
     }
 }
