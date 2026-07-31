@@ -874,7 +874,7 @@ function openProductDetail(item) {
     modalImg.src = item.image;
     modalName.innerText = item.name;
     modalPrice.innerText = item.price;
-    modalDesc.innerText = item.desc || `${item.name} - ÖZEL TARİFİMİZ İLE TAZECİK HAZIRLANMIŞ EŞSİZ BİR LEZZET.`;
+    modalDesc.innerText = item.desc || `${item.name}`
     
     iosModal.classList.add('active');
     document.body.style.overflow = 'hidden';
