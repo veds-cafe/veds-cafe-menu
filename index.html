@@ -340,7 +340,7 @@
             padding: 15px 10px 10px 10px;
         }
 
-        /* ==================== MENYU ELEMENTLƏRİ VƏ BÖYÜK ŞƏKİL STRUKTURU ==================== */
+        /* ==================== MENYU ELEMENTLƏRİ ==================== */
         .menu-item-wrapper {
             display: flex;
             flex-direction: column;
@@ -406,35 +406,7 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
 
-        .item-dropdown-icon {
-            font-size: 0.75rem;
-            color: #d4a373;
-            transition: transform 0.3s ease;
-        }
-        
-        .menu-item-wrapper.expanded .item-dropdown-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Böyük Şəkil Paneli (Daxili) */
-        .large-image-panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out;
-            display: flex;
-            justify-content: center;
-            background-color: rgba(20, 11, 7, 0.5);
-        }
-
-        .large-product-img {
-            width: 100%;
-            max-height: 450px;
-            object-fit: cover;
-            border-top: 1px solid rgba(212, 163, 115, 0.1);
-            cursor: pointer !important;
-        }
-
-        /* ==================== IOS SAFARI ÜÇÜN MÜTLƏQ MODAL (FULLSCREEN ZOOM) ==================== */
+        /* ==================== MƏHSUL DETAL MODAL (GÖNDƏRİLƏN DİZAYN) ==================== */
         .ios-full-modal {
             position: fixed !important;
             top: 0 !important;
@@ -442,40 +414,103 @@
             width: 100vw !important;
             height: 100vh !important;
             height: 100dvh !important;
-            background: rgba(0, 0, 0, 0.92);
+            background-color: #381d0c !important; /* Şəkildəki qəhvəyi ton */
             display: none;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: flex-start;
             z-index: 9999999 !important;
-            -webkit-transform: translateZ(99999px) !important;
-            transform: translateZ(99999px) !important;
-            padding: 15px;
+            padding: 20px;
             box-sizing: border-box;
-            cursor: pointer;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .ios-full-modal.active {
             display: flex !important;
         }
 
-        .ios-full-modal img {
-            max-width: 95%;
-            max-height: 85vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.9);
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+        /* Sol üst geriyə düyməsi */
+        .ios-full-modal-close {
+            align-self: flex-start;
+            background-color: #231205;
+            color: #ffffff;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            -webkit-tap-highlight-color: transparent;
         }
 
-        .ios-full-modal-close {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            color: #d4a373;
-            font-size: 2rem;
+        /* Dairəvi Məhsul Şəkli */
+        .modal-img-container {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            background-color: #231205;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Məhsul Məlumat Bölməsi */
+        .modal-details {
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+            margin-top: 15px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .modal-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
             font-weight: bold;
-            line-height: 1;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .modal-price {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+
+        .modal-description {
+            font-size: 0.95rem;
+            color: #e2d2c3;
+            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -550,7 +585,7 @@
 <script>
 const translations = {
     welcome: { tr: "Hoş Geldiniz", en: "Welcome", ru: "Добро пожаловать" },
-    button: { tr: "Menüye Gidin", en: "Go to Menu",ru: "Перейти к меню" },
+    button: { tr: "Menüye Gidin", en: "Go to Menu", ru: "Перейти к меню" },
     heroTitle: { tr: "Yeni Ürünlerimiz", en: "Our New Products", ru: "Наши Новинки" },
     heroSubtitle: { tr: "Keşfetmeye Başlayın", en: "Start Exploring", ru: "Начните исследовать" }
 };
@@ -576,21 +611,21 @@ function enterSite() {
 
 const vedMenu = {
     "🆕 Yeni Ürünler": [
-        { name: "Mojito", price: "200 ₺", image: "images/duzmojito.jpeg", hasLargeImage: true, isSpecial: true },
-        { name: "HAVALI HİNDİSTAN CEVİZLİ MOCTAİL", price: "200 ₺", image: "images/fresh-hindistan.jpeg", hasLargeImage: true, isSpecial: true },
-        { name: "MANGO LAVANTA MOCTAİL", price: "200 ₺", image: "images/gunbatimi.jpeg", hasLargeImage: true, isSpecial: true },
-        { name: "ORMAN MEYVELİ MOJİTO", price: "225 ₺", image: "images/ormanmojito.jpeg", hasLargeImage: true, isSpecial: true },
-        { name: "YABAN MERSİNİ LİMON MOCTAİL", price: "200 ₺", image: "images/yaban-mersini-limon-moctail.jpg", hasLargeImage: true, isSpecial: true },
-        { name: "KAVUN-KİVİ SPECIAL", price: "200 ₺", image: "images/kav-ivi-special.jpg", hasLargeImage: true, isSpecial: true }
+        { name: "Mojito", price: "200 ₺", image: "images/duzmojito.jpeg", isSpecial: true, desc: "TAZE NANE, LİMON VE SPRITE İLE HAZIRLANMIŞ EŞSİZ SERİNLETİCİ KARIŞIM." },
+        { name: "HAVALI HİNDİSTAN CEVİZLİ MOCTAİL", price: "200 ₺", image: "images/fresh-hindistan.jpeg", isSpecial: true, desc: "TROPİK HİNDİSTAN CEVİZİ VE ÖZEL AROMALARIN FERAHLAŞTIRICI BİRLEŞİMİ." },
+        { name: "MANGO LAVANTA MOCTAİL", price: "200 ₺", image: "images/gunbatimi.jpeg", isSpecial: true, desc: "TATLI MANGO DOKUNUŞU VE DİNLENDİRİCİ LAVANTA AROMASI." },
+        { name: "ORMAN MEYVELİ MOJİTO", price: "225 ₺", image: "images/ormanmojito.jpeg", isSpecial: true, desc: "TAZE ORMAN MEYVELERİ VE NANENİN MÜKEMMEL UYUMU." },
+        { name: "YABAN MERSİNİ LİMON MOCTAİL", price: "200 ₺", image: "images/yaban-mersini-limon-moctail.jpg", isSpecial: true, desc: "EKŞİ TATLI YABAN MERSİNİ VE LİMON AROMALI FERAH KARIŞIM." },
+        { name: "KAV-İVİ SPECIAL", price: "200 ₺", image: "images/kav-ivi-special.jpg", isSpecial: true, desc: "KİVİ ,KAVUN VE SPRİTE İLE HAZIRLANMIŞ EKŞİ TATLI MÜKEMMEL SERİNLETİCİ BİRLEŞİM" }
     ],
     " Günün Menüsü (Ekonomi Paketler)": [
-        { name: "Kurabiye", price: "150 ₺", image: "images/kurabiye.jpg" },
-        { name: "Affogato", price: "150 ₺", image: "images/affogato.jpg" },
-        { name: "Tavuklu Mantarlı Makarna + Coca Cola", price: "300 ₺", image: "images/makarnacola.jpg" },
+        { name: "Kurabiye", price: "150 ₺", image: "images/kurabiye.jpg", desc: "Taze pişmiş lezzetli kurabiye." },
+        { name: "Affogato", price: "150 ₺", image: "images/affogato.jpg", desc: "Sıcak espresso ve dondurmanın eşsiz buluşması." },
+        { name: "Tavuklu Mantarlı Makarna + Coca Cola", price: "300 ₺", image: "images/makarnacola.jpg", desc: "Kremalı tavuklu mantarlı makarna ve buz gibi Coca-Cola menüsü." },
     ],
     "✨ Ved's Özel Menü & Specials": [
-        { name: "Ved's Limonata", price: "175 ₺", image: "images/vedslimonata.jpg", isSpecial: true },
-        { name: "MAKARNA + PATATES KIZARTMASI + COLA", price: "450 ₺", image: "images/makarnapatatescola.jpg", isSpecial: true }
+        { name: "Ved's Limonata", price: "175 ₺", image: "images/vedslimonata.jpg", isSpecial: true, desc: "Özel tarifimiz ile hazırlanan taptaze imza limonatamız." },
+        { name: "MAKARNA + PATATES KIZARTMASI + COLA", price: "450 ₺", image: "images/makarnapatatescola.jpg", isSpecial: true, desc: "Doyurucu özel menü paketi." }
     ],
      " Nargile": [
         { name: "MANTERRA DARK TÜTÜN", price: "550 ₺", image: "images/manterradarktutun.jpg" },
@@ -807,28 +842,47 @@ const vedMenu = {
 
 const accordionOutput = document.getElementById('menu-accordion-output');
 
-// iOS SAFARI ÜÇÜN DİNAMİK FULL-SCREEN MODAL YARATMA SYSTEMİ
+// MƏHSUL DETAL MODALI (IOS & ANDROID UYUMLU DETAL PƏNCƏRƏSİ)
 let iosModal = document.querySelector('.ios-full-modal');
 if (!iosModal) {
     iosModal = document.createElement('div');
     iosModal.className = 'ios-full-modal';
-    iosModal.innerHTML = '<span class="ios-full-modal-close">&times;</span><img src="" alt="Büyük Görsel">';
+    iosModal.innerHTML = `
+        <div class="ios-full-modal-close">&#8592;</div>
+        <div class="modal-img-container">
+            <img src="" alt="Məhsul Görsəli" id="modal-product-img">
+        </div>
+        <div class="modal-details">
+            <div class="modal-header-row">
+                <div class="modal-title" id="modal-product-name"></div>
+                <div class="modal-price" id="modal-product-price"></div>
+            </div>
+            <div class="modal-description" id="modal-product-desc"></div>
+        </div>
+    `;
     document.body.appendChild(iosModal);
 }
 
-const iosModalImg = iosModal.querySelector('img');
+const modalImg = document.getElementById('modal-product-img');
+const modalName = document.getElementById('modal-product-name');
+const modalPrice = document.getElementById('modal-product-price');
+const modalDesc = document.getElementById('modal-product-desc');
+const closeBtn = iosModal.querySelector('.ios-full-modal-close');
 
-function openFullImage(src) {
-    if(!src) return;
-    iosModalImg.src = src;
+function openProductDetail(item) {
+    if(!item) return;
+    modalImg.src = item.image;
+    modalName.innerText = item.name;
+    modalPrice.innerText = item.price;
+    modalDesc.innerText = item.desc || `${item.name} - ÖZEL TARİFİMİZ İLE TAZECİK HAZIRLANMIŞ EŞSİZ BİR LEZZET.`;
+    
     iosModal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
-iosModal.addEventListener('click', function() {
+closeBtn.addEventListener('click', function() {
     iosModal.classList.remove('active');
     document.body.style.overflow = '';
-    iosModalImg.src = '';
 });
 
 function renderAccordionMenu() {
@@ -852,8 +906,6 @@ function renderAccordionMenu() {
             const wrapperDiv = document.createElement('div');
             wrapperDiv.className = item.isSpecial ? 'menu-item-wrapper special-item' : 'menu-item-wrapper';
             
-            const dropdownArrowHTML = item.hasLargeImage ? `<span class="item-dropdown-icon">▼</span>` : '';
-            
             wrapperDiv.innerHTML = `
                 <div class="menu-item">
                     <div class="item-details">
@@ -862,64 +914,15 @@ function renderAccordionMenu() {
                     </div>
                     <div class="item-price-wrapper">
                         <span class="item-price">${item.price}</span>
-                        ${dropdownArrowHTML}
                     </div>
                 </div>
-                ${item.hasLargeImage ? `
-                <div class="large-image-panel">
-                    <img src="${item.image}" alt="${item.name} Büyük" class="large-product-img">
-                </div>
-                ` : ''}
             `;
             
-            // Kiçik şəkilə basanda birbaşa iOS Safari Modalında açılır
-            const smallImg = wrapperDiv.querySelector('.item-img');
-            if (smallImg) {
-                smallImg.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    openFullImage(item.image);
-                });
-            }
-
-            // Akkordeon daxilində böyük şəkil olan elementlər üçün 
-            if (item.hasLargeImage) {
-                const menuItemClickable = wrapperDiv.querySelector('.menu-item');
-                const imgPanel = wrapperDiv.querySelector('.large-image-panel');
-                const largeImg = wrapperDiv.querySelector('.large-product-img');
-
-                // Daxili böyük şəkilə basıldıqda tam ekran Modal açır
-                if(largeImg) {
-                    largeImg.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        openFullImage(item.image);
-                    });
-                }
-                
-                menuItemClickable.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('item-img')) return;
-
-                    const isExpanded = wrapperDiv.classList.contains('expanded');
-                    
-                    gridDiv.querySelectorAll('.menu-item-wrapper.expanded').forEach(otherWrapper => {
-                        if (otherWrapper !== wrapperDiv) {
-                            otherWrapper.classList.remove('expanded');
-                            otherWrapper.querySelector('.large-image-panel').style.maxHeight = null;
-                        }
-                    });
-                    
-                    if (isExpanded) {
-                        wrapperDiv.classList.remove('expanded');
-                        imgPanel.style.maxHeight = null;
-                    } else {
-                        wrapperDiv.classList.add('expanded');
-                        imgPanel.style.maxHeight = "500px";
-                        
-                        setTimeout(() => {
-                            panel.style.maxHeight = panel.scrollHeight + 500 + "px";
-                        }, 50);
-                    }
-                });
-            }
+            // Həm şəklə, həm də bütün sətrə/ada basıldıqda kart modalını açır
+            const menuItemClickable = wrapperDiv.querySelector('.menu-item');
+            menuItemClickable.addEventListener('click', function() {
+                openProductDetail(item);
+            });
 
             gridDiv.appendChild(wrapperDiv);
         });
