@@ -451,9 +451,10 @@
 
         /* Dairəvi Məhsul Şəkli */
         .modal-img-container {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    aspect-ratio: 1 / 1;
+    border-radius: 0;
             overflow: hidden;
             margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
@@ -618,16 +619,15 @@ const vedMenu = {
         { name: "Dubai Cup", price: "250 ₺", image: "images/dubai-cup.jpg", isSpecial: true }
     ],
     "❄️ Yeni Ürünler": [
-        { name: "Şeftali Çilekli Moctail", price: "200 ₺", image: "images/seftali-cilekli-moctail.jpg", isSpecial: true, desc: "ŞEFTALİ VE ÇİLEK AROMALARININ FERAH VE MEYVELİ UYUMU." },
-        { name: "Mojito", price: "200 ₺", image: "images/duzmojito.jpeg", isSpecial: true, desc: "TAZE NANE, LİMON VE SPRITE İLE HAZIRLANMIŞ EŞSİZ SERİNLETİCİ KARIŞIM." },
+        { name: "Şeftali Çilekli Moctail", price: "200 ₺", image: "images/seftali-cilekli-moctail.jpeg", isSpecial: true, desc: "ŞEFTALİ VE ÇİLEK AROMALARININ FERAH VE MEYVELİ UYUMU." },
         { name: "HAVALI HİNDİSTAN CEVİZLİ MOCTAİL", price: "200 ₺", image: "images/fresh-hindistan.jpeg", isSpecial: true, desc: "TROPİK HİNDİSTAN CEVİZİ VE ÖZEL AROMALARIN FERAHLAŞTIRICI BİRLEŞİMİ." },
         { name: "MANGO LAVANTA MOCTAİL", price: "200 ₺", image: "images/gunbatimi.jpeg", isSpecial: true, desc: "TATLI MANGO DOKUNUŞU VE DİNLENDİRİCİ LAVANTA AROMASI." },
         { name: "ORMAN MEYVELİ MOJİTO", price: "225 ₺", image: "images/ormanmojito.jpeg", isSpecial: true, desc: "TAZE ORMAN MEYVELERİ VE NANENİN MÜKEMMEL UYUMU." },
         { name: "YABAN MERSİNİ LİMON MOCTAİL", price: "200 ₺", image: "images/yaban-mersini-limon-moctail.jpg", isSpecial: true, desc: "EKŞİ TATLI YABAN MERSİNİ VE LİMON AROMALI FERAH KARIŞIM." },
-        { name: "KAV-İVİ SPECIAL", price: "200 ₺", image: "images/kav-ivi-special.jpg", isSpecial: true, desc: "KİVİ ,KAVUN VE SPRİTE İLE HAZIRLANMIŞ EKŞİ TATLI MÜKEMMEL SERİNLETİCİ BİRLEŞİM" }
+        { name: "KAV-İVİ SPECIAL", price: "200 ₺", image: "images/kav-ivi-special.jpg", isSpecial: true, desc: "KİVİ ,KAVUN VE SPRİTE İLE HAZIRLANMIŞ EKŞİ TATLI MÜKEMMEL SERİNLETİCİ BİRLEŞİM" },
+          { name: "Mojito", price: "200 ₺", image: "images/duzmojito.jpeg", isSpecial: true, desc: "TAZE NANE, LİMON VE SPRITE İLE HAZIRLANMIŞ EŞSİZ SERİNLETİCİ KARIŞIM." },
     ],
-    
-    " Günün Menüsü (Ekonomi Paketler)": [
+    "🍽 Günün Menüsü (Ekonomi Paketler)": [
         { name: "Kurabiye (su an mevcut digil)", price: "150 ₺", image: "images/kurabiye.jpg", desc: "Taze pişmiş lezzetli kurabiye." },
         { name: "Affogato", price: "150 ₺", image: "images/affogato.jpg", desc: "Sıcak espresso ve dondurmanın eşsiz buluşması." },
         { name: "Tavuklu Mantarlı Makarna + Coca Cola", price: "300 ₺", image: "images/makarnacola.jpg", desc: "Kremalı tavuklu mantarlı makarna ve buz gibi Coca-Cola menüsü." },
