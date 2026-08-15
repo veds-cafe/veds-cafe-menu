@@ -66,33 +66,36 @@
             margin-top: auto;
             margin-bottom: auto;
         }
-
-        .logo-svg {
-            width: 280px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .text-letter {
-            font-family: 'Georgia', serif;
+        .plain-veds-logo {
+            font-family: Arial, sans-serif;
             font-size: 70px;
-            font-weight: bold;
-            fill: none;
-            stroke: #d4a373;
-            stroke-width: 2;
-            stroke-dasharray: 300;
-            stroke-dashoffset: 300;
-            animation: drawLetter 1.2s forwards ease-in-out;
+            font-weight: 700;
+            line-height: 1;
+            color: #ffffff;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            animation: vedsBlurToSharp 1.8s ease-out both;
         }
 
-        .letter-v { animation-delay: 0.1s; }
-        .letter-e { animation-delay: 0.3s; }
-        .letter-d { animation-delay: 0.5s; }
-        .letter-s { animation-delay: 0.7s; }
-
-        @keyframes drawLetter {
-            to { stroke-dashoffset: 0; fill: #d4a373; }
+        @keyframes vedsBlurToSharp {
+            0% {
+                opacity: 0;
+                filter: blur(18px);
+                transform: scale(1.015);
+            }
+            45% {
+                opacity: 0.65;
+                filter: blur(8px);
+                transform: scale(1.005);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: scale(1);
+            }
         }
+
+        
 
         .welcome-text {
             color: #f5ebe6;
@@ -214,19 +217,16 @@
             justify-content: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
-
         .video-hero-bg {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
+            inset: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             z-index: 1;
+            display: block;
         }
+
 
         .video-hero-overlay {
             position: absolute;
@@ -451,10 +451,9 @@
 
         /* Dairəvi Məhsul Şəkli */
         .modal-img-container {
-    width: 250px;
-    height: 250px;
-    aspect-ratio: 1 / 1;
-    border-radius: 0;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
             overflow: hidden;
             margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.6);
@@ -520,13 +519,7 @@
 <!-- GİRİŞ EKRANI -->
 <div id="intro-overlay">
     <div class="intro-content-wrapper">
-        <svg class="logo-svg" viewBox="0 0 320 100">
-            <text x="10" y="75" class="text-letter letter-v">V</text>
-            <text x="70" y="75" class="text-letter letter-e">E</text>
-            <text x="125" y="75" class="text-letter letter-d">D</text>
-            <text x="180" y="50" class="text-letter letter-v" style="font-size: 40px;">'</text>
-            <text x="210" y="75" class="text-letter letter-s">S</text>
-        </svg>
+        <div class="plain-veds-logo">VED'S</div>
         
         <div class="welcome-text" id="welcome-label">Hoş Geldiniz</div>
         
@@ -567,10 +560,12 @@
 
 <!-- VİDEO BAŞLIQ BÖLMƏSİ -->
 <div class="video-hero-container">
-    <video class="video-hero-bg" autoplay loop muted playsinline>
-        <source src="mojito.mp4" type="video/mp4">
-        <source src="mojito" type="video/mp4">
-    </video>
+    <img
+        class="video-hero-bg"
+        src="images/yeni-urunler.jpg"
+        alt="Yeni Ürünlerimiz"
+        onerror="this.onerror=null; this.src='images/fon.jpeg';"
+    >
     <div class="video-hero-overlay"></div>
     <div class="video-hero-content">
         <h2 class="video-hero-title" id="hero-title-text">Yeni Ürünlerimiz</h2>
@@ -611,7 +606,8 @@ function enterSite() {
 }
 
 const vedMenu = {
-    "🍰Yeni Tatlılarımız": [
+   
+     "🍰Yeni Tatlılarımız": [
         { name: "Yaz Tatlısı", price: "250 ₺", image: "images/yaztatlisi.jpg", isSpecial: true, desc: "ORMAN MEYVESİ, MUHALLEBİ, İRMİK VE BEYAZ ÇİKOLATA." },
         { name: "Magnolya", price: "200 ₺", image: "images/magnolya.png", isSpecial: true, desc: "BİSKÜVİ PARÇALARI, ÇİLEK VE PASTACI KREMASI." },
         { name: "Hindistan Cevizli Cup", price: "250 ₺", image: "images/hindistancup.jpg", isSpecial: true, desc: "ISLAK KEK, HİNDİSTAN CEVİZLİ KREMA, ÇİKOLATA, BEYAZ ÇİKOLATA." },
@@ -626,45 +622,28 @@ const vedMenu = {
             { name: "LIMONLU CHEESCAKE" ,price: "250 ₺" , image: "images/chescake.jpg", isSpecial: true},
 
     ],
-    "❄️ Yeni Ürünler": [
-        { name: "Şeftali Çilekli Moctail", price: "200 ₺", image: "images/seftali-cilekli-moctail.jpeg", isSpecial: true, desc: "ŞEFTALİ VE ÇİLEK AROMALARININ FERAH VE MEYVELİ UYUMU." },
+     "🆕 Yeni Ürünler": [
+         { name: "Şeftali Çilekli Moctail", price: "200 ₺", image: "images/seftali-cilekli-moctail.jpeg", isSpecial: true, desc: "ŞEFTALİ VE ÇİLEK AROMALARININ FERAH VE MEYVELİ UYUMU." },
+        { name: "Mojito", price: "200 ₺", image: "images/duzmojito.jpeg", isSpecial: true, desc: "TAZE NANE, LİMON VE SPRITE İLE HAZIRLANMIŞ EŞSİZ SERİNLETİCİ KARIŞIM." },
         { name: "HAVALI HİNDİSTAN CEVİZLİ MOCTAİL", price: "200 ₺", image: "images/fresh-hindistan.jpeg", isSpecial: true, desc: "TROPİK HİNDİSTAN CEVİZİ VE ÖZEL AROMALARIN FERAHLAŞTIRICI BİRLEŞİMİ." },
         { name: "MANGO LAVANTA MOCTAİL", price: "200 ₺", image: "images/gunbatimi.jpeg", isSpecial: true, desc: "TATLI MANGO DOKUNUŞU VE DİNLENDİRİCİ LAVANTA AROMASI." },
         { name: "ORMAN MEYVELİ MOJİTO", price: "225 ₺", image: "images/ormanmojito.jpeg", isSpecial: true, desc: "TAZE ORMAN MEYVELERİ VE NANENİN MÜKEMMEL UYUMU." },
         { name: "YABAN MERSİNİ LİMON MOCTAİL", price: "200 ₺", image: "images/yaban-mersini-limon-moctail.jpg", isSpecial: true, desc: "EKŞİ TATLI YABAN MERSİNİ VE LİMON AROMALI FERAH KARIŞIM." },
-        { name: "KAV-İVİ SPECIAL", price: "200 ₺", image: "images/kav-ivi-special.jpg", isSpecial: true, desc: "KİVİ ,KAVUN VE SPRİTE İLE HAZIRLANMIŞ EKŞİ TATLI MÜKEMMEL SERİNLETİCİ BİRLEŞİM" },
-          { name: "Mojito", price: "200 ₺", image: "images/duzmojito.jpeg", isSpecial: true, desc: "TAZE NANE, LİMON VE SPRITE İLE HAZIRLANMIŞ EŞSİZ SERİNLETİCİ KARIŞIM." },
+        { name: "KAV-İVİ SPECIAL", price: "200 ₺", image: "images/kav-ivi-special.jpg", isSpecial: true, desc: "KİVİ ,KAVUN VE SPRİTE İLE HAZIRLANMIŞ EKŞİ TATLI MÜKEMMEL SERİNLETİCİ BİRLEŞİM" }
     ],
-    "🍽 Günün Menüsü (Ekonomi Paketler)": [
-        { name: "Ice Filtre Kahve + Dubai Cup", price: "360 ₺", image: "images/ice-filtre-dubai-cup.jpg" },
-{ name: "Ice Latte + Dubai Cup", price: "360 ₺", image: "images/ice-latte-dubai-cup.jpg" },
-{ name: "Ice Americano + Dubai Cup", price: "350 ₺", image: "images/ice-americano-dubai-cup.jpg" },
-{ name: "Çay + Dubai Cup", price: "280 ₺", image: "images/cay-dubai-cup.jpg" },
-{ name: "Ice Americano + Magnolya", price: "320 ₺", image: "images/ice-americano-magnolya.jpg" },
-{ name: "Ice Filtre Kahve + Magnolya", price: "320 ₺", image: "images/ice-filtre-magnolya.jpg" },
-{ name: "Ice Latte + Magnolya", price: "310 ₺", image: "images/ice-latte-magnolya.jpg" },
-
-{ name: "Çay + Magnolya", price: "230 ₺", image: "images/cay-magnolya.jpg" },
-
-{ name: "Hindistan Cevizli Cup + Çay", price: "230 ₺", image: "images/hindistan-cevizli-cup-cay.jpg" },
-{ name: "Hindistan Cevizli Cup + Ice Latte", price: "310 ₺", image: "images/hindistan-cevizli-cup-ice-latte.jpg" },
-{ name: "Hindistan Cevizli Cup + Ice Americano", price: "310 ₺", image: "images/hindistan-cevizli-cup-ice-americano.jpg" },
-{ name: "Hindistan Cevizli Cup + Ice Filtre Kahve", price: "310 ₺", image: "images/hindistan-cevizli-cup-ice-filtre.jpg" },
-
-{ name: "Çilek Oreo Cup + Çay", price: "280 ₺", image: "images/cilek-oreo-cup-cay.jpg" },
-{ name: "Çilek Oreo Cup + Ice Latte", price: "350 ₺", image: "images/cilek-oreo-cup-ice-latte.jpg" },
-{ name: "Çilek Oreo Cup + Ice Americano", price: "350 ₺", image: "images/cilek-oreo-cup-ice-americano.jpg" },
-{ name: "Çilek Oreo Cup + Ice Filtre Kahve", price: "350 ₺", image: "images/cilek-oreo-cup-ice-filtre.jpg" },
+    " Günün Menüsü (Ekonomi Paketler)": [
+        { name: "Kurabiye", price: "150 ₺", image: "images/kurabiye.jpg", desc: "Taze pişmiş lezzetli kurabiye." },
+        { name: "Affogato", price: "150 ₺", image: "images/affogato.jpg", desc: "Sıcak espresso ve dondurmanın eşsiz buluşması." },
         { name: "Tavuklu Mantarlı Makarna + Coca Cola", price: "300 ₺", image: "images/makarnacola.jpg", desc: "Kremalı tavuklu mantarlı makarna ve buz gibi Coca-Cola menüsü." },
     ],
     "✨ Ved's Özel Menü & Specials": [
         { name: "Ved's Limonata", price: "175 ₺", image: "images/vedslimonata.jpg", isSpecial: true, desc: "Özel tarifimiz ile hazırlanan taptaze imza limonatamız." },
-            { name: "Affogato", price: "150 ₺", image: "images/affogato.jpg", desc: "Sıcak espresso ve dondurmanın eşsiz buluşması." },
+        { name: "MAKARNA + PATATES KIZARTMASI + COLA", price: "450 ₺", image: "images/makarnapatatescola.jpg", isSpecial: true, desc: "Doyurucu özel menü paketi." }
     ],
      " Nargile": [
         { name: "MANTERRA DARK TÜTÜN", price: "550 ₺", image: "images/manterradarktutun.jpg" },
         { name: "KÖZ DEĞİŞİMİ", price: "100 ₺", image: "images/koz-degisimi.jpg" },
-        { name: "NARGİLE", price: "450 ₺", image: "images/nargile.jpg" },
+        { name: "NARGİLE", price: "400 ₺", image: "images/nargile.jpg" },
         { name: "ANASON/CAPİCİNO/ÜZÜM", price: "450 ₺", image: "images/nargile.jpg" },
         { name: "LÜLE DEĞİŞİM", price: "200 ₺", image: "images/lule-degisim.jpg" },
         { name: "MİX NARGİLE", price: "450 ₺", image: "images/nargile.jpg" }
